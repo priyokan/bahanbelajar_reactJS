@@ -10,7 +10,7 @@ class Main extends Component{
         <Router>
             <Navku/>
             <Switch>
-                <Route path='/tabel' exact component={ TableCobe }/>
+                <Route path='/tabel' component={ TableCobe }/>
                 <Route path='/form' exact component={ Formreg }/>
             </Switch>      
         </Router>    

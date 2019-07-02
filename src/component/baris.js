@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import { Button } from 'react-bootstrap';
 
 class Baris extends Component{
     render(props){
@@ -7,7 +8,10 @@ class Baris extends Component{
                 <td>{this.props.id}</td>
                 <td>{this.props.title}</td>
                 <td>{this.props.content}</td>
-                <td>@mdo</td>
+                <td>
+                    <Button variant="danger" className='m-1'>Hapus</Button>
+                    <Button variant="info" className='m-1'>edit</Button>
+                </td>
             </tr>
         )
     }

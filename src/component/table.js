@@ -1,6 +1,5 @@
 import React,{Component} from 'react';  
 import {Table} from 'react-bootstrap';
-import axios from 'axios'
 import Baris from './baris'
 
 class TableCoba extends Component{
@@ -13,19 +12,28 @@ class TableCoba extends Component{
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/notes`)
-          .then(res => {              
-            this.setState({
-                datas:res.data
-            })
-          })
+        fetch(`http://localhost:5000/notes`)
+         .then(result=>result.json())
+         .then(result=>{
+             this.setState({
+                 datas: this.state.datas.concat(result)
+             })
+         })
       }
 
-    baris(i){}
+    // baris(i){
+    //     let datas = this.state.datas
+    //     let muncul = []
+
+    //     datas.forEach(data => {
+    //         muncul.concat(data)
+    //     }) 
+    //     console.log(muncul)
+    // }
 
     render(){
-        const ret =  this.state.datas[0][0]
-        console.log(ret)
+        // console.log(this.state.datas)
+
         return(
             <Table striped bordered hover size="sm">
                 <thead>
@@ -33,25 +41,18 @@ class TableCoba extends Component{
                     <th>#</th>
                     <th>Title</th>
                     <th>Content</th>
-                    <th>Username</th>
+                    <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                   <Baris
-                    // id={ret[0]._id}
-                    title='buku'
-                    content='habis gelap ga terang terang'/>
-                    <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                    <tr>
-                    <td>3</td>
-                    <td colSpan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    </tr>                    
+                       {this.state.datas.map((data,index)=>{
+                           return(<Baris
+                            id={index+1}
+                            title={data.title}
+                            content={data.content}
+                            key={data._id}
+                            />)
+                       })}     
                 </tbody>
             </Table>
         )
