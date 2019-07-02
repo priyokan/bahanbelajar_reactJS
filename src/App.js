@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import Navbuat from  './component/navbar'
-import TableCobe from './component/table'
+import React, { Component } from 'react'
+import Main from  './component/main'
+import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 
 class App extends Component {
+  
   render() {
     return (
-      <div className="App">
-        <Navbuat/>
-        <TableCobe/>
-      </div>
+      <Router>
+        <div className="App">
+          <Main/>
+        </div>
+      </Router>
     );
   }
 }
