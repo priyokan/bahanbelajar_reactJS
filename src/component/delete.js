@@ -1,55 +1,58 @@
 import React,{Component} from 'react'
 import {Modal,Button,ButtonToolbar} from 'react-bootstrap'
+// import { Link } from 'react-router-dom';
+// import { Router,Redirect } from 'react-router'
 
-class Delete extends Component{    
-    constructor(...args) {
-        super(...args);
-    
-        this.state = { modalShow: false };
-      } 
-    render(h) {
-        let modalClose = () => this.setState({ modalShow: false });
-        return(
-        <div>
-            <ButtonToolbar>
-                <Button
-                variant="primary"
-                onClick={() => this.setState({ modalShow: true })}
-                >
-                Launch vertically centered modal
-                </Button>
-
-                <Delete
-                show={this.state.modalShow}
-                onHide={modalClose}
-                />
-            </ButtonToolbar>
-            <Modal
-                {...this.props}
-                size="sm"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Modal heading
-                </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <h4>Centered Modal</h4>
-                <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-                    ac consectetur ac, vestibulum at eros.
-                </p>
-                </Modal.Body>
-                <Modal.Footer>
-                <Button onClick={this.props.onHide}>Close</Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
-    );
+class MyVerticallyCenteredModal extends Component {
+    render() {
+      return (
+        <Modal
+          {...this.props}
+          size="sm"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+            <h4>Hapus Notes</h4>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>            
+            <p>
+                Apakah anda yakin?
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.onHide}>
+              Tidak
+            </Button>
+            <Button variant="danger" onClick={this.handleClose}>
+              hapus
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      );
+    }
   }
-}
+  
+  class App extends Component {
+  
+    render() {
+      let modalClose = () =>{
+        this.props.history.replace('/')
+      }
+  
+      return (
+        <ButtonToolbar>
+            
+          <MyVerticallyCenteredModal
+            show={true}
+            onHide={modalClose}
+          />
+        </ButtonToolbar>
+      );
+    }
+  }
 
-export default Delete
+
+export default App
