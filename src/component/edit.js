@@ -64,7 +64,6 @@ class MyVerticallyCenteredModal extends Component {
           </Modal.Header>
           <Form onSubmit={handleSubmit}>
           <Modal.Body>            
-            {console.log(this.props.props.match.params)}
                 <Form.Group controlId="formTitle">
                     <Form.Label>Judul Note</Form.Label>
                     <Form.Control value={this.state.form.title} type="text" name="title" onChange={handleChange} placeholder="masukan judul Note" />

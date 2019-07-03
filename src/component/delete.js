@@ -6,7 +6,7 @@ import {Modal,Button,ButtonToolbar} from 'react-bootstrap'
 class MyVerticallyCenteredModal extends Component {
    
     render(props) {
-        const handleClose = () =>{
+        const handleDone = () =>{
             fetch(`http://localhost:5000/notes/${this.props.props.match.params.idNotes}`, {
                 method: 'DELETE',   
             })
@@ -38,7 +38,7 @@ class MyVerticallyCenteredModal extends Component {
             <Button variant="secondary" onClick={this.props.onHide}>
               Tidak
             </Button>
-            <Button variant="danger" onClick={handleClose}>
+            <Button variant="danger" onClick={handleDone}>
               hapus
             </Button>
           </Modal.Footer>
