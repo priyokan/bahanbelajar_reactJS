@@ -11,9 +11,7 @@ class Formreg extends Component{
                 content:''
             }
         }
-    }
-
-    
+    }    
 
     render(){
         const handleChange = (evt) => {

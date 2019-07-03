@@ -4,18 +4,52 @@ import {Modal,Form,Button,ButtonToolbar} from 'react-bootstrap'
 // import { Router,Redirect } from 'react-router'
 
 class MyVerticallyCenteredModal extends Component {
-   
+  
+  constructor(props){
+      super(props)
+      this.state={
+          form:{
+              title:this.props.props.match.params.titleNote,
+              content:this.props.props.match.params.contentNote,
+          }
+      }
+    }
+
     render(props) {
-        const handleClose = () =>{
-            fetch(`http://localhost:5000/notes/${this.props.props.match.params.idNotes}`, {
-                method: 'DELETE',   
+      const handleChange = (evt) => {
+        const {value, name}= evt.target
+        this.setState(prevstate => ({
+            form: {
+                ...prevstate.form,
+                [name]: value
+            }
+        }))
+    }
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        const form = this.state.form
+        const formData = new FormData()
+        formData.append('title',form.title)
+        formData.append('content',form.content)
+
+        const setting ={
+            method:'PUT',
+            body:formData
+        };
+
+        fetch(`http://localhost:5000/notes/${this.props.props.match.params.idNotes}`,setting)
+        .then(()=>{
+            this.setState({
+                form:{
+                    title:'',
+                    content:'',
+                }
             })
-            .then(response => response.json())
-            .then(response => {
-                this.props.props.history.replace(`/tabelberubah`)
-            })
-            
+            this.props.props.history.replace('/tabelberubah')
+        })            
         }
+        
       return (
             <Modal
             {...this.props}
@@ -25,12 +59,12 @@ class MyVerticallyCenteredModal extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-            <h4>Hapus Notes</h4>
+            <h4>Edit Notes</h4>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>            
           <Form onSubmit={handleSubmit}>
-                <h1>Add Note</h1>
+          <Modal.Body>            
+            {console.log(this.props.props.match.params)}
                 <Form.Group controlId="formTitle">
                     <Form.Label>Judul Note</Form.Label>
                     <Form.Control value={this.state.form.title} type="text" name="title" onChange={handleChange} placeholder="masukan judul Note" />
@@ -42,19 +76,18 @@ class MyVerticallyCenteredModal extends Component {
                     <Form.Label>Content Note</Form.Label>
                     <Form.Control value={this.state.form.content} type="text" name='content' onChange={handleChange} placeholder="Masukan Kontent Note" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+               
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.props.onHide}>
               Tidak
             </Button>
-            <Button variant="danger" onClick={handleClose}>
-              hapus
-            </Button>
+            <Button variant="info" type="submit">
+                    Submit
+                </Button>
+            
           </Modal.Footer>
+          </Form>
         </Modal>
       );
     }
