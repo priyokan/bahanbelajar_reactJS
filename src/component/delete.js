@@ -4,10 +4,22 @@ import {Modal,Button,ButtonToolbar} from 'react-bootstrap'
 // import { Router,Redirect } from 'react-router'
 
 class MyVerticallyCenteredModal extends Component {
-    render() {
+   
+    render(props) {
+        const handleClose = () =>{
+            fetch(`http://localhost:5000/notes/${this.props.noteId}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response)
+                this.props.history.replace('/tabel')
+            })
+            
+        }
       return (
-        <Modal
-          {...this.props}
+            <Modal
+            {...this.props}
           size="sm"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -19,6 +31,7 @@ class MyVerticallyCenteredModal extends Component {
           </Modal.Header>
           <Modal.Body>            
             <p>
+                {this.props.noteId}
                 Apakah anda yakin?
             </p>
           </Modal.Body>
@@ -26,7 +39,7 @@ class MyVerticallyCenteredModal extends Component {
             <Button variant="secondary" onClick={this.props.onHide}>
               Tidak
             </Button>
-            <Button variant="danger" onClick={this.handleClose}>
+            <Button variant="danger" onClick={handleClose}>
               hapus
             </Button>
           </Modal.Footer>
@@ -36,10 +49,14 @@ class MyVerticallyCenteredModal extends Component {
   }
   
   class App extends Component {
-  
+
+    componentDidMount() {
+        
+      }
     render() {
+    const { match } = this.props;
       let modalClose = () =>{
-        this.props.history.replace('/')
+        this.props.history.replace('/tabel')
       }
   
       return (
@@ -48,6 +65,7 @@ class MyVerticallyCenteredModal extends Component {
           <MyVerticallyCenteredModal
             show={true}
             onHide={modalClose}
+            noteId={match.params.idNotes}
           />
         </ButtonToolbar>
       );

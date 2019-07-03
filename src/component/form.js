@@ -39,6 +39,14 @@ class Formreg extends Component{
             };
 
             fetch('http://localhost:5000/notes',setting)
+            .then(()=>{
+                this.setState({
+                    form:{
+                        title:'',
+                        content:'',
+                    }
+                })
+            })
         }
         return(
             <Container>
@@ -53,14 +61,12 @@ class Formreg extends Component{
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Content Note</Form.Label>
-                    <Form.Control type="text" name='content' onChange={handleChange} placeholder="Masukan Kontent Note" />
+                    <Form.Control value={this.state.form.content} type="text" name='content' onChange={handleChange} placeholder="Masukan Kontent Note" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
-            {this.state.form.title}
-            {this.state.form.content}
             </Container>
         )
     }

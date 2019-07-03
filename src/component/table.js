@@ -47,7 +47,8 @@ class TableCoba extends Component{
                 <tbody>
                        {this.state.datas.map((data,index)=>{
                            return(<Baris
-                            id={index+1}
+                            id={data._id}
+                            index={index+1}
                             title={data.title}
                             content={data.content}
                             key={data._id}
