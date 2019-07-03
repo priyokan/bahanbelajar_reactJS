@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Modal,Button,ButtonToolbar} from 'react-bootstrap'
+import {Modal,Form,Button,ButtonToolbar} from 'react-bootstrap'
 // import { Link } from 'react-router-dom';
 // import { Router,Redirect } from 'react-router'
 
@@ -19,7 +19,7 @@ class MyVerticallyCenteredModal extends Component {
       return (
             <Modal
             {...this.props}
-          size="sm"
+          // size="sm"
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
@@ -29,10 +29,23 @@ class MyVerticallyCenteredModal extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>            
-            <p>
-            {this.props.props.match.params.idNotes}
-                Apakah anda yakin?
-            </p>
+          <Form onSubmit={handleSubmit}>
+                <h1>Add Note</h1>
+                <Form.Group controlId="formTitle">
+                    <Form.Label>Judul Note</Form.Label>
+                    <Form.Control value={this.state.form.title} type="text" name="title" onChange={handleChange} placeholder="masukan judul Note" />
+                    <Form.Text className="text-muted">
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Content Note</Form.Label>
+                    <Form.Control value={this.state.form.content} type="text" name='content' onChange={handleChange} placeholder="Masukan Kontent Note" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.props.onHide}>
