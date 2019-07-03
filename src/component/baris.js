@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import { Button, } from 'react-bootstrap';
+import Edit from './edit'
 import Delete from './delete'
-import {LinkContainer} from 'react-router-bootstrap'
+import {LinkContainer, } from 'react-router-bootstrap'
 import {BrowserRouter as Router,Route,Switch,} from 'react-router-dom'
 
 class Baris extends Component{
@@ -15,11 +16,13 @@ class Baris extends Component{
                     <td>       
                         <LinkContainer to={`/tabel/delete/${this.props.id}`}>
                             <Button variant="danger" className='m-1'>delete</Button>
-                        </LinkContainer>    
-                        <Button variant="info" className='m-1'>edit</Button>
+                        </LinkContainer>  
+                        <LinkContainer to={`/tabel/edit/${this.props.id}`}>
+                            <Button variant="info" className='m-1'>edit</Button>
+                        </LinkContainer>  
                         <Switch>
                             <Route path='/tabel/delete/:idNotes' component={ Delete } />
-                            {/* <Route path='/form' exact component={ Formreg }/> */}
+                            <Route path='/tabel/edit/:idNotes' component={ Edit }/>
                         </Switch>
                 </td>
             </tr>
