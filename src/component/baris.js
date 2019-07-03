@@ -3,7 +3,7 @@ import { Button, } from 'react-bootstrap';
 import Edit from './edit'
 import Delete from './delete'
 import {LinkContainer, } from 'react-router-bootstrap'
-import {BrowserRouter as Router,Route,Switch,} from 'react-router-dom'
+import {Route,Switch,} from 'react-router-dom'
 
 class Baris extends Component{
     render(props){    
