@@ -12,8 +12,8 @@ class Baris extends Component{
                 <td>{this.props.index}</td>
                 <td>{this.props.title}</td>
                 <td>{this.props.content}</td>
-                <td>            
-                    <Router>
+                    <td>            
+                        <Router>
                         <LinkContainer to={`/tabel/delete/${this.props.id}`}>
                             <Button variant="danger" className='m-1'>delete</Button>
                         </LinkContainer>    

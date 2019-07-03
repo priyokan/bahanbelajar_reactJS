@@ -46,6 +46,7 @@ class Formreg extends Component{
                         content:'',
                     }
                 })
+                this.props.history.replace('/tabel')
             })
         }
         return(
