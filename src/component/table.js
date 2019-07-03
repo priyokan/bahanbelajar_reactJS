@@ -12,6 +12,10 @@ class TableCoba extends Component{
     }
 
     componentDidMount() {
+        this.loadData()
+      }
+
+    loadData(){
         fetch(`http://localhost:5000/notes`)
          .then(result=>result.json())
          .then(result=>{
@@ -19,17 +23,7 @@ class TableCoba extends Component{
                  datas: this.state.datas.concat(result)
              })
          })
-      }
-
-    // baris(i){
-    //     let datas = this.state.datas
-    //     let muncul = []
-
-    //     datas.forEach(data => {
-    //         muncul.concat(data)
-    //     }) 
-    //     console.log(muncul)
-    // }
+    }
 
     render(){
         // console.log(this.state.datas)

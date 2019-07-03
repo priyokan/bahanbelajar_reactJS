@@ -7,13 +7,12 @@ class MyVerticallyCenteredModal extends Component {
    
     render(props) {
         const handleClose = () =>{
-            fetch(`http://localhost:5000/notes/${this.props.noteId}`, {
-                method: 'DELETE',
+            fetch(`http://localhost:5000/notes/${this.props.props.match.params.idNotes}`, {
+                method: 'DELETE',   
             })
             .then(response => response.json())
             .then(response => {
-                console.log(response)
-                this.props.history.replace('/tabel')
+                this.props.props.history.replace(`/tabel/1`)
             })
             
         }
@@ -31,7 +30,7 @@ class MyVerticallyCenteredModal extends Component {
           </Modal.Header>
           <Modal.Body>            
             <p>
-                {this.props.noteId}
+            {this.props.props.match.params.idNotes}
                 Apakah anda yakin?
             </p>
           </Modal.Body>
@@ -54,7 +53,7 @@ class MyVerticallyCenteredModal extends Component {
         
       }
     render() {
-    const { match } = this.props;
+    const props = this.props;
       let modalClose = () =>{
         this.props.history.replace('/tabel')
       }
@@ -65,7 +64,7 @@ class MyVerticallyCenteredModal extends Component {
           <MyVerticallyCenteredModal
             show={true}
             onHide={modalClose}
-            noteId={match.params.idNotes}
+            props={props}
           />
         </ButtonToolbar>
       );

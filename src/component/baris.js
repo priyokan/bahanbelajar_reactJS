@@ -12,8 +12,7 @@ class Baris extends Component{
                 <td>{this.props.index}</td>
                 <td>{this.props.title}</td>
                 <td>{this.props.content}</td>
-                    <td>            
-                        <Router>
+                    <td>       
                         <LinkContainer to={`/tabel/delete/${this.props.id}`}>
                             <Button variant="danger" className='m-1'>delete</Button>
                         </LinkContainer>    
@@ -21,8 +20,7 @@ class Baris extends Component{
                         <Switch>
                             <Route path='/tabel/delete/:idNotes' component={ Delete } />
                             {/* <Route path='/form' exact component={ Formreg }/> */}
-                        </Switch>  
-                    </Router>
+                        </Switch>
                 </td>
             </tr>
         )
